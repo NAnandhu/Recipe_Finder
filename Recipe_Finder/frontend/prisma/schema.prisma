@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db{  // Changed from Recipe_Db to db
+  provider = "mysql"
+  url      = env("DATABASE_URL")  // Using environment variable for better security
+}
+
+model Signup {
+  id        Int    @id @default(autoincrement())  // Auto-incremented ID
+  FirstName String @db.VarChar(50)               // User's first name
+  LastName  String @db.VarChar(50)               // User's last name
+  Email     String @unique @db.VarChar(100)      // User's email (unique)
+  password  String @db.VarChar(50)               // User's password (should be hashed)
+}
